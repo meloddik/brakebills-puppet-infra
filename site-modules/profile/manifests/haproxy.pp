@@ -10,7 +10,11 @@ class profile::haproxy {
     defaults_options => {
       'mode'    => 'http',
       'log'     => 'global',
-      'option'  => 'donlognull',
+      'option'  => [
+        'dontlognull',
+        'http-server-close',
+        'redispatch',
+      ],
       'retries' => '3',
       'timeout' => [
         'http-request 10s',
@@ -18,10 +22,22 @@ class profile::haproxy {
         'connect 10s',
         'client 1m',
         'server 1m',
-        'http-keep-alive',
+        'http-keep-alive 10s',
         'check 10s',
       ],
       'maxconn' => '3000',
+    },
+  }
+  haproxy::listen { 'api-server-6443':
+    ipaddress => '*',
+    ports     => [6443],
+    mode      => 'tcp',
+    options   => {
+      'option'  => [
+        'httpchk GET /readyz HTTP/1.0',
+        'log-health-checks',
+      ],
+      'balance' => 'roundrobin',
     },
   }
 }
