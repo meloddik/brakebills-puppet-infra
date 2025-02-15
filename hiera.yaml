@@ -9,6 +9,6 @@ defaults:
   # data_hash: yaml_data
 hierarchy:
   - name: "Per-node data (yaml version)"
-    path: "nodes/%{facts.hostname}.yaml"
+    path: "nodes/%{facts.networking.hostname}.yaml"
   - name: "Common data"
     path: "common.yaml"
