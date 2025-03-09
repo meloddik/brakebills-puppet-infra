@@ -1,4 +1,9 @@
 class profile::unbound {
+  service { 'systemd-resolved':
+    ensure   => running,
+    enable   => true,
+    provider => 'systemd',
+  }
   file { '/etc/systemd/resolved.conf':
     ensure => 'file',
     notify => Service['systemd-resolved'],
