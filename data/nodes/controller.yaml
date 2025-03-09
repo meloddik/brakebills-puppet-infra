@@ -1,0 +1,4 @@
+classes:
+  - role::networking
+seam-interface: enp0s31f6
+seam-cidr: 10.1.30.11/24

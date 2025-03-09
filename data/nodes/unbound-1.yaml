@@ -1,2 +1,5 @@
 classes:
   - role::dns_server
+  - role::networking
+seam-interface: enp1s0
+seam-cidr: 10.1.30.8/24
