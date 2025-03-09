@@ -1,4 +1,7 @@
 class profile::unbound {
+  package { 'unbound':
+    ensure => 'present',
+  }
   file { '/etc/unbound/unbound.conf':
     ensure => file,
     notify => Service['unbound'],
