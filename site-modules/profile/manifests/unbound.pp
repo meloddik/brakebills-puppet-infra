@@ -2,6 +2,9 @@ class profile::unbound {
   package { 'unbound':
     ensure => 'present',
   }
+  file { '/etc/unbound/local.d':
+    ensure => 'directory',
+  }
   file { '/etc/unbound/unbound.conf':
     ensure => file,
     notify => Service['unbound'],
