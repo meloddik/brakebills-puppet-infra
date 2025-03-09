@@ -17,6 +17,10 @@ class profile::unbound {
   package { 'unbound':
     ensure => 'present',
   }
+  exec { 'setup-unbound-certs':
+    command => '/usr/sbin/unbound-control-setup',
+    unless  => '/usr/bin/test -f /etc/unbound/unbound_server.pem',
+  }
   file { '/etc/unbound/local.d':
     ensure => 'directory',
   }
