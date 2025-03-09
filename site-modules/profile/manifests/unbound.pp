@@ -9,6 +9,11 @@ class profile::unbound {
     notify => Service['systemd-resolved'],
     source => 'puppet:///modules/profile/unbound/resolved.conf',
   }
+  file { '/etc/default/unbound':
+    ensure => 'file',
+    source => 'puppet:///modules/profile/unbound/default',
+    notify => Service['systemd-resolved'],
+  }
   package { 'unbound':
     ensure => 'present',
   }
